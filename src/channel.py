@@ -1,12 +1,12 @@
-
-
 class Channel:
-    """Класс для ютуб-канала"""
+    def __init__(self, channel_id, channel_data):
+        self.channel_id = channel_id
+        self.channel_data = channel_data
 
-    def __init__(self, channel_id: str) -> None:
-        """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API."""
-        pass
+    def print_info(self):
+        print("Channel ID:", self.channel_id)
+        print("Channel Title:", self.channel_data['snippet']['title'])
+        print("View Count:", self.channel_data['statistics']['viewCount'])
+        print("Subscriber Count:", self.channel_data['statistics']['subscriberCount'])
+        print("Description:", self.channel_data['snippet']['description'])
 
-    def print_info(self) -> None:
-        """Выводит в консоль информацию о канале."""
-        pass
