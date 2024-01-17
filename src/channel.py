@@ -1,59 +1,14 @@
 from googleapiclient.discovery import build
 import os
 
-# YT_API_KEY скопирован из гугла и вставлен в переменные окружения
-api_key: str = os.getenv('YT_API_KEY')
-
-# создание экземпляра класса Channel и вывод информации о канале
-channel_id = 'UC-OVMPlMA3-YCIeg4z5z23A'  # MoscowPython
-channel_data = {
-    "kind": "youtube#channelListResponse",
-    "etag": "uAdmwT0aDhY9LmAzJzIafD6ATRw",
-    "pageInfo": {
-        "totalResults": 1,
-        "resultsPerPage": 5
-    },
-    "items": [
-        {
-            "kind": "youtube#channel",
-            "etag": "cPh77A8SKcZxxs_UPCiBaXP1wNDk",
-            "id": "UC-OVMPlMA3-YCIeg4z5z23A",
-            "snippet": {
-                "title": "MoscowPython",
-                "description": "Видеозаписи со встреч питонистов и джангистов в Москве и не только. :)\nПрисоединяйтесь: https://www.faceboom.com/groups/MoscowDjango! :)",
-                "customUrl": "@moscowdjangoru",
-                "publishedAt": "2012-07-13T09:48:44Z",
-                "thumbnails": {
-                    "default": {
-                        "url": "https://yt3.ggpht.com/ytc/AGIKgqNv2rZ6mOSuXvJLYhmTc0nd-LtI5RiDtsEBpguJXA=s88-c-k-c0x00ffffff-no-rj"
-                    },
-                    "medium": {
-                        "url": "https://yt3.ggpht.com/ytc/AGIKgqNv2rZ6mOSuXvJLYhmTc0nd-LtI5RiDtsEBpguJXA=s240-c-k-c0x00ffffff-no-rj"
-                    },
-                    "high": {
-                        "url": "https://yt3.ggpht.com/ytc/AGIKgqNv2rZ6mOSuXvJLYhmTc0nd-LtI5RiDtsEBpguJXA=s800-c-k-c0x00ffffff-no-rj"
-                    }
-                },
-                "localized": {
-                    "title": "MoscowPython",
-                    "description": "Видеозаписи со встреч питонистов и джангистов в Москве и не только. :)\nПрисоединяйтесь: https://www.faceboom.com/groups/MoscowDjango! :)"
-                },
-                "country": "RU"
-            },
-            "statistics": {
-                "viewCount": "2303120",
-                "subscriberCount": "25900",
-                "hiddenSubscriberCount": False,
-                "videoCount": "685"
-            }
-        }
-    ]
-}
-
 class Channel:
     def __init__(self, channel_id):
-        self.channel_id = channel_id
+        self.__channel_id = channel_id
         self.channel_data = self.get_channel_data()
+
+    @property
+    def channel_id(self):
+        return self.__channel_id
 
     @property
     def id(self):
@@ -93,7 +48,7 @@ class Channel:
 
     @classmethod
     def get_service(cls):
-        api_key = os.getenv('YT_API_KEY')
+        api_key = os.getenv('YOUR_API_KEY')
         youtube = build('youtube', 'v3', developerKey=api_key)
         return youtube
 
